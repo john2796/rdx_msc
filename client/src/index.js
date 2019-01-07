@@ -1,19 +1,20 @@
 import React from "react";
 import ReactDOM from "react-dom";
-import "./index.css";
-import App from "./App";
-import * as serviceWorker from "./serviceWorker";
 import { BrowserRouter as Router, Route } from "react-router-dom";
-import AddItem from "./components/AddItem";
 
-const app = (
+import App from "./App";
+import AddItem from "./components/AddItem";
+import IndexItem from "./components/IndexItem";
+import EditItem from "./components/EditItem";
+
+ReactDOM.render(
   <Router>
     <div>
-      <Route path="/" component={App} />
+      <Route exact path="/" component={App} />
       <Route path="/add-item" component={AddItem} />
+      <Route path="/index" component={IndexItem} />
+      <Route path="/edit/:id" component={EditItem} />
     </div>
-  </Router>
+  </Router>,
+  document.getElementById("root")
 );
-
-ReactDOM.render(app, document.getElementById("root"));
-serviceWorker.unregister();
