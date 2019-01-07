@@ -6,6 +6,10 @@ const cors = require("cors");
 const port = 4200;
 
 const db = require("./config/key").MongoURI;
+// use bodyparser middleware
+app.use(bodyParser.urlencoded({ extended: false }));
+app.use(cors());
+app.use(bodyParser.json());
 
 mongoose
   .connect(
@@ -15,10 +19,7 @@ mongoose
   .then(() => console.log("MongoDB Connected..."))
   .catch(err => console.log(err));
 
-// use bodyparser middleware
-app.use(bodyParser.urlencoded({ extended: false }));
-app.use(cors());
-app.use(bodyParser.json());
-
+// import itemsrouter and use
+const itemRouter = require("./routes/itemRouter");
 app.use("/items", itemRouter);
 app.listen(port, () => console.log(`app listening on port ${port}`));
